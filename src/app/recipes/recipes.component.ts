@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { Recipe } from './recipe';
+import { ShoppingListAddComponent } from '../shopping-list/shopping-list-add.component';
+import { ShoppingListComponent } from '../shopping-list/shopping-list.component';
 
 
 @Component({
@@ -18,8 +20,6 @@ export class RecipesComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClicked() {
-    
-  }
+  
 
 }
