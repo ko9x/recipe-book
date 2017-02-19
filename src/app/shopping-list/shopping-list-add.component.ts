@@ -11,9 +11,9 @@ import { ShoppingListService } from './shopping-list.service';
 })
 export class ShoppingListAddComponent implements OnChanges {
   isAdd = true;
-  @Input() item: Ingredient
-  @Output() cleared = new EventEmitter()
-  @Output() hello = new EventEmitter()
+  @Input() item: Ingredient;
+  @Output() cleared = new EventEmitter();
+  @Output() hello = new EventEmitter();
   
 
 
@@ -33,12 +33,10 @@ export class ShoppingListAddComponent implements OnChanges {
 
   onSubmit(ingredient: Ingredient) {
     if(!this.isAdd) {
-      console.log(this.isAdd);
       const newItem = new Ingredient(ingredient.name, ingredient.amount);
       this.shoppingListService.editItem(this.item, newItem);
       this.onClear()
     } else {
-      console.log(this.isAdd);
       const addedItem = new Ingredient(ingredient.name, ingredient.amount);
       this.shoppingListService.addItem(addedItem);
     }

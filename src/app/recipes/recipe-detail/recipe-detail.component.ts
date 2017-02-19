@@ -19,7 +19,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private recipeIndex: number
 
-  selectedRecipe: Recipe;
+  private confirmed: boolean = null
+
+  private selectedRecipe: Recipe;
 
   constructor(
     private shoppingListService: ShoppingListService,
@@ -44,9 +46,19 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   onEdit() {
     this.router.navigate(['/recipes', this.recipeIndex, 'edit']);
   }
-
   onDelete(recipe: Recipe) {
-    this.recipeService.deleteRecipe(recipe);
+    this.selectedRecipe = recipe
+    this.confirmed = confirm(`
+      Are you sure you want to delete this recipe? 
+      This change cannot be undone.
+    `);
+    this.onDeleteConfirmed(this.selectedRecipe, this.confirmed)
+  }
+
+  onDeleteConfirmed(recipe: Recipe, confirmed: boolean) {
+    if(confirmed) {
+      this.recipeService.deleteRecipe(recipe);
+    }
     this.router.navigate(['/recipes']);
   }
 

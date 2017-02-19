@@ -14,7 +14,7 @@ import { Recipe } from '../recipe';
   styleUrls: ['./recipe-edit.component.css']
 })
 export class RecipeEditComponent implements OnInit, OnDestroy {
-  recipeForm: FormGroup;
+  private recipeForm: FormGroup;
   private recipeIndex: number
   private recipe: Recipe
   private isNew = true;
@@ -26,6 +26,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.subscription = this.route.params.subscribe(
       (params: any) => {
         if (params.hasOwnProperty('id')) {
+          // THE + INFRONT OF PARAMS ON THE LINE BELOW CHANGES IT FROM A STRING TO A NUMBER
           this.recipeIndex = +params['id'];
           this.recipe = this.recipeService.getRecipe(this.recipeIndex);
           this.isNew = false;
@@ -33,7 +34,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
           this.isNew = true;
           this.recipe = null;
         }
-        this.initForm(this.isNew);
+        this.initForm();
       }
     );
   }
@@ -73,7 +74,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.router.navigate(['../']);
   }
 
-  private initForm(isNew: boolean) {
+  private initForm() {
     let recipeName = '';
     let recipeImageUrl = '';
     let recipeContent = '';
